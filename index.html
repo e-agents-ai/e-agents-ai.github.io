@@ -357,17 +357,12 @@ header.nav.scrolled{border-color:var(--line)}
 .tl-row.you .tl-end{color:var(--live);font-weight:600}
 @keyframes grow{to{width:var(--w,100%)}}
 
-/* loss calculator */
+/* loss / ROI calculator */
 .loss{margin-top:76px;padding-top:56px;border-top:1px solid var(--line)}
-.loss-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.loss-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
 .loss h3{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.1vw,27px);color:var(--t1);line-height:1.3;margin:16px 0 16px}
 .loss p{color:var(--t2);font-size:17px;line-height:1.6;margin:0;max-width:520px}
-.formula{display:flex;align-items:stretch;gap:10px}
-.f-cell{flex:1;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 16px;display:flex;flex-direction:column;gap:8px;justify-content:center}
-.f-cell .fv{font-weight:800;font-size:16.5px;color:var(--t1);line-height:1.3}
-.f-cell .fk{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);line-height:1.5}
-.f-cell .fk-sub{display:block;text-transform:none;letter-spacing:.04em;color:#5b6380;margin-top:2px}
-.f-op{display:grid;place-items:center;font-family:var(--mono);font-size:20px;color:var(--cyn);font-weight:700;flex:none;width:22px}
+/* shared steppers */
 .stepper{display:flex;align-items:center;gap:8px}
 .st-btn{flex:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line-strong);background:rgba(255,255,255,.06);color:#fff;font-family:var(--mono);font-size:22px;font-weight:600;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .st-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
@@ -375,13 +370,46 @@ header.nav.scrolled{border-color:var(--line)}
 .st-btn:disabled{opacity:.35;cursor:default}
 .st-btn:focus-visible{outline:2px solid var(--cyn);outline-offset:2px}
 .st-val{flex:1;min-width:62px;text-align:center;font-family:var(--mono);font-weight:600;font-size:20px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
-.f-result{font-family:var(--mono);font-weight:600;font-size:clamp(24px,2.4vw,31px);color:var(--live);letter-spacing:-.01em;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 22px rgba(var(--live-rgb),.3)}
-@media(max-width:600px){.st-btn{width:48px;height:48px}.st-val{font-size:21px}}
+/* ROI calculator */
+.roi-calc{display:flex;flex-direction:column;gap:18px}
+.roi-inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.roi-field{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;display:flex;flex-direction:column;gap:11px}
+.roi-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);line-height:1.5}
+.roi-toggle{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--t2);font-family:var(--font);font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:999px;cursor:pointer;touch-action:manipulation;transition:background .15s,border-color .15s,color .15s}
+.roi-toggle:hover{background:rgba(255,255,255,.08);color:var(--t1);border-color:var(--t2)}
+.roi-toggle-ic{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:rgba(var(--accent-rgb),.16);color:var(--accent);font-family:var(--mono);font-size:17px;line-height:1;transition:transform .2s}
+.roi-toggle[aria-expanded="true"] .roi-toggle-ic{transform:rotate(45deg)}
+.roi-assume{display:flex;flex-direction:column;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:20px 18px}
+.roi-assume[hidden]{display:none}
+.roi-calc .roi-assume-note{font-size:13px;color:var(--t3);line-height:1.5;margin:0;max-width:none}
+.roi-slider{display:flex;flex-direction:column;gap:8px}
+.roi-slider label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-family:var(--font);font-size:14.5px;font-weight:600;color:var(--t1);line-height:1.35}
+.roi-sval{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--cyn);font-variant-numeric:tabular-nums;flex:none}
+.roi-hint{font-size:12.5px;color:var(--t3);line-height:1.45}
+.roi-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:rgba(255,255,255,.1);outline:none;cursor:pointer;margin:2px 0}
+.roi-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--cyn);border:3px solid #0b1029;box-shadow:0 2px 8px rgba(0,0,0,.45);cursor:pointer}
+.roi-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--cyn);border:3px solid #0b1029;box-shadow:0 2px 8px rgba(0,0,0,.45);cursor:pointer}
+.roi-range:focus-visible{outline:2px solid var(--cyn);outline-offset:3px}
+.roi-results{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+.roi-res{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:20px 18px;display:flex;flex-direction:column;gap:7px}
+.roi-res.is-rec{border-color:rgba(var(--live-rgb),.4);background:rgba(var(--live-rgb),.06)}
+.roi-res-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3)}
+.roi-res-num{font-family:var(--mono);font-weight:600;font-size:clamp(22px,2.3vw,30px);line-height:1.15;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.roi-res-num.is-lost{color:var(--t1)}
+.roi-res-num.is-rec{color:var(--live);text-shadow:0 0 22px rgba(var(--live-rgb),.3)}
+.roi-res-sub{font-size:13px;color:var(--t2);line-height:1.45}
+.roi-res.is-rec .roi-res-sub{color:var(--live)}
+.roi-calc .roi-caveat{font-size:13px;color:var(--t3);line-height:1.55;margin:6px 0 0;max-width:none}
+.roi-calc .roi-foot{font-size:13px;color:var(--t3);line-height:1.55;margin:0;max-width:none;padding-left:14px;border-left:2px solid var(--line-strong)}
+.roi-cta{align-self:flex-start;margin-top:4px}
 @media(max-width:880px){.loss-grid{grid-template-columns:1fr;gap:30px}}
 @media(max-width:600px){
   .loss{margin-top:56px;padding-top:42px}
-  .formula{flex-direction:column;gap:6px}
-  .f-op{width:auto;padding:2px 0}
+  .roi-inputs{grid-template-columns:1fr}
+  .roi-results{grid-template-columns:1fr}
+  .roi-cta{align-self:stretch;justify-content:center}
+  .st-btn{width:48px;height:48px}
+  .st-val{font-size:21px}
 }
 @media(max-width:880px){.pain-grid{grid-template-columns:1fr;gap:44px}}
 
@@ -763,34 +791,75 @@ footer{padding:46px 0;border-top:1px solid var(--line);background:var(--bg);colo
   <div class="wrap">
     <div class="loss reveal">
       <div class="loss-grid">
-        <div>
-          <span class="eyebrow light">Простая арифметика</span>
-          <h3>Сколько стоит одно пропущенное обращение</h3>
-          <p>Подставьте свои цифры — посчитайте, сколько уходит мимо.</p>
+        <div class="roi-intro">
+          <span class="eyebrow light">Честная арифметика</span>
+          <h3>Посчитайте, сколько теряете — и сколько реально вернуть</h3>
+          <p>Подставьте свои цифры. Дефолты намеренно осторожные — чтобы это была честная оценка, а не красивая.</p>
         </div>
-        <div class="formula" id="lossCalc">
-          <div class="f-cell">
-            <div class="stepper">
-              <button type="button" class="st-btn" data-k="check" data-dir="-1" aria-label="Уменьшить средний чек">−</button>
-              <span class="st-val" id="calcCheck">3 000</span>
-              <button type="button" class="st-btn" data-k="check" data-dir="1" aria-label="Увеличить средний чек">+</button>
+        <div class="roi-calc" id="roiCalc">
+          <div class="roi-inputs">
+            <div class="roi-field">
+              <span class="roi-lbl" id="lblInquiries">Обращений в месяц</span>
+              <div class="stepper" role="group" aria-labelledby="lblInquiries">
+                <button type="button" class="st-btn" data-k="inquiries" data-dir="-1" aria-label="Меньше обращений в месяц">−</button>
+                <span class="st-val" id="calcInquiries" aria-live="polite">120</span>
+                <button type="button" class="st-btn" data-k="inquiries" data-dir="1" aria-label="Больше обращений в месяц">+</button>
+              </div>
             </div>
-            <span class="fk">Средний чек, ₽</span>
-          </div>
-          <span class="f-op">×</span>
-          <div class="f-cell">
-            <div class="stepper">
-              <button type="button" class="st-btn" data-k="leads" data-dir="-1" aria-label="Уменьшить число пропущенных обращений">−</button>
-              <span class="st-val" id="calcLeads">10</span>
-              <button type="button" class="st-btn" data-k="leads" data-dir="1" aria-label="Увеличить число пропущенных обращений">+</button>
+            <div class="roi-field">
+              <span class="roi-lbl" id="lblCheck">Средний чек, ₽</span>
+              <div class="stepper" role="group" aria-labelledby="lblCheck">
+                <button type="button" class="st-btn" data-k="check" data-dir="-1" aria-label="Уменьшить средний чек">−</button>
+                <span class="st-val" id="calcCheck" aria-live="polite">3 000</span>
+                <button type="button" class="st-btn" data-k="check" data-dir="1" aria-label="Увеличить средний чек">+</button>
+              </div>
             </div>
-            <span class="fk">Пропущенных обращений в месяц<span class="fk-sub">ночь · выходные · „не успели“</span></span>
           </div>
-          <span class="f-op">=</span>
-          <div class="f-cell">
-            <span class="f-result" id="calcResult" aria-live="polite">30 000 ₽</span>
-            <span class="fk">потери за месяц при уже оплаченной рекламе</span>
+
+          <button type="button" class="roi-toggle" id="roiToggle" aria-expanded="false" aria-controls="roiAssume">
+            <span class="roi-toggle-ic" aria-hidden="true">+</span>
+            Уточнить допущения · по умолчанию осторожные
+          </button>
+          <div class="roi-assume" id="roiAssume" hidden>
+            <p class="roi-assume-note">Перетащите, если хотите оценку строже.</p>
+            <div class="roi-slider">
+              <label for="sLost">Доля обращений, что теряете сейчас <span class="roi-sval" id="vLost">20%</span></label>
+              <input type="range" class="roi-range" id="sLost" data-k="lostShare" data-out="vLost" min="5" max="50" step="1" value="20" aria-describedby="hLost">
+              <span class="roi-hint" id="hLost">ночь, выходные, занятость, поздний ответ</span>
+            </div>
+            <div class="roi-slider">
+              <label for="sConv">Конверсия обращения в заказ <span class="roi-sval" id="vConv">30%</span></label>
+              <input type="range" class="roi-range" id="sConv" data-k="conv" data-out="vConv" min="5" max="70" step="1" value="30" aria-describedby="hConv">
+              <span class="roi-hint" id="hConv">сколько обращений доходит до выполненного заказа</span>
+            </div>
+            <div class="roi-slider">
+              <label for="sRecovery">Сколько потерянных вернёт агент <span class="roi-sval" id="vRecovery">40%</span></label>
+              <input type="range" class="roi-range" id="sRecovery" data-k="recovery" data-out="vRecovery" min="10" max="70" step="1" value="40" aria-describedby="hRecovery">
+              <span class="roi-hint" id="hRecovery">честно — не все: часть клиентов уже ушла, часть звонит, а не пишет</span>
+            </div>
+            <div class="roi-slider">
+              <label for="sMargin">Маржа с заказа <span class="roi-sval" id="vMargin">50%</span></label>
+              <input type="range" class="roi-range" id="sMargin" data-k="margin" data-out="vMargin" min="20" max="90" step="1" value="50" aria-describedby="hMargin">
+              <span class="roi-hint" id="hMargin">сколько остаётся с заказа после расходов</span>
+            </div>
           </div>
+
+          <div class="roi-results" aria-live="polite">
+            <div class="roi-res">
+              <span class="roi-res-lbl">Сейчас теряете</span>
+              <span class="roi-res-num is-lost" id="rLostMoney">≈ 11 000 ₽/мес</span>
+              <span class="roi-res-sub" id="rLostOrders">≈ 7,2 заказов мимо при уже оплаченной рекламе</span>
+            </div>
+            <div class="roi-res is-rec">
+              <span class="roi-res-lbl">Агент способен вернуть</span>
+              <span class="roi-res-num is-rec" id="rRecMoney">≈ 4 500 ₽/мес</span>
+              <span class="roi-res-sub" id="rRecOrders">≈ 2,9 заказов в месяц</span>
+            </div>
+          </div>
+
+          <p class="roi-caveat">Это оценка по вашим цифрам и средним допущениям, а не обещание результата. Реальный эффект зависит от вашего потока, ниши, качества базы знаний и того, как настроен агент.</p>
+          <p class="roi-foot">Если ваш основной канал — Авито, к этому добавляется рост показов от статуса „отвечает сразу“ — он увеличивает и сам поток обращений. Здесь мы это не считаем, чтобы не приукрашивать.</p>
+          <a href="#form" class="btn btn-primary roi-cta">Проверить агента на своём примере <span class="arr">→</span></a>
         </div>
       </div>
     </div>
@@ -1208,28 +1277,68 @@ addEventListener('resize',demoInViewCheck);
 addEventListener('load',demoInViewCheck);
 demoInViewCheck();
 
-/* ---------- loss calculator ---------- */
-const calcState={check:3000,leads:10};
-const calcCfg={check:{step:500,min:500},leads:{step:1,min:1}};
-const calcEls={check:document.getElementById('calcCheck'),leads:document.getElementById('calcLeads'),result:document.getElementById('calcResult')};
+/* ---------- ROI calculator ---------- */
+const roi={inquiries:120,check:3000,lostShare:20,conv:30,recovery:40,margin:50};
+const roiStep={inquiries:{step:10,min:10,max:600},check:{step:500,min:500,max:30000}};
+const roiEl={
+  inquiries:document.getElementById('calcInquiries'),
+  check:document.getElementById('calcCheck'),
+  lostMoney:document.getElementById('rLostMoney'),
+  lostOrders:document.getElementById('rLostOrders'),
+  recMoney:document.getElementById('rRecMoney'),
+  recOrders:document.getElementById('rRecOrders')
+};
 const fmtRu=n=>n.toLocaleString('ru-RU');
-function calcRender(){
-  calcEls.check.textContent=fmtRu(calcState.check);
-  calcEls.leads.textContent=fmtRu(calcState.leads);
-  calcEls.result.textContent=fmtRu(calcState.check*calcState.leads)+' ₽';
-  document.querySelectorAll('#lossCalc .st-btn[data-dir="-1"]').forEach(b=>{
-    b.disabled=calcState[b.dataset.k]<=calcCfg[b.dataset.k].min;
+const round500=n=>Math.round(n/500)*500;
+const fmtMoney=n=>fmtRu(round500(n))+' ₽';
+const fmtOrders=n=>n<10?n.toFixed(1).replace('.',','):fmtRu(Math.round(n));
+function roiRender(){
+  const valuePerOrder=roi.check*roi.margin/100;
+  const lostInquiries=roi.inquiries*roi.lostShare/100;
+  const lostOrders=lostInquiries*roi.conv/100;
+  const lostMoney=lostOrders*valuePerOrder;
+  const recoveredOrders=lostOrders*roi.recovery/100;
+  const recoveredMoney=recoveredOrders*valuePerOrder;
+  roiEl.inquiries.textContent=fmtRu(roi.inquiries);
+  roiEl.check.textContent=fmtRu(roi.check);
+  roiEl.lostMoney.textContent='≈ '+fmtMoney(lostMoney)+'/мес';
+  roiEl.lostOrders.textContent='≈ '+fmtOrders(lostOrders)+' заказов мимо при уже оплаченной рекламе';
+  roiEl.recMoney.textContent='≈ '+fmtMoney(recoveredMoney)+'/мес';
+  roiEl.recOrders.textContent='≈ '+fmtOrders(recoveredOrders)+' заказов в месяц';
+  document.querySelectorAll('#roiCalc .stepper .st-btn').forEach(b=>{
+    const cfg=roiStep[b.dataset.k],dir=Number(b.dataset.dir);
+    b.disabled=dir<0?roi[b.dataset.k]<=cfg.min:roi[b.dataset.k]>=cfg.max;
   });
 }
-document.querySelectorAll('#lossCalc .st-btn').forEach(b=>{
+function roiFill(r){
+  const min=+r.min,max=+r.max,pct=(+r.value-min)/(max-min)*100;
+  r.style.background='linear-gradient(90deg,var(--cyn) '+pct+'%,rgba(255,255,255,.1) '+pct+'%)';
+}
+document.querySelectorAll('#roiCalc .stepper .st-btn').forEach(b=>{
   b.addEventListener('click',()=>{
-    const k=b.dataset.k,cfg=calcCfg[k];
-    calcState[k]=Math.max(cfg.min,calcState[k]+cfg.step*Number(b.dataset.dir));
-    calcRender();
+    const k=b.dataset.k,cfg=roiStep[k];
+    roi[k]=Math.min(cfg.max,Math.max(cfg.min,roi[k]+cfg.step*Number(b.dataset.dir)));
+    roiRender();
     calcGoalOnce();
   });
 });
-calcRender();
+document.querySelectorAll('#roiCalc .roi-range').forEach(r=>{
+  roiFill(r);
+  r.addEventListener('input',()=>{
+    roi[r.dataset.k]=Number(r.value);
+    document.getElementById(r.dataset.out).textContent=r.value+'%';
+    roiFill(r);
+    roiRender();
+    calcGoalOnce();
+  });
+});
+const roiToggle=document.getElementById('roiToggle'),roiAssume=document.getElementById('roiAssume');
+roiToggle.addEventListener('click',()=>{
+  const open=roiToggle.getAttribute('aria-expanded')==='true';
+  roiToggle.setAttribute('aria-expanded',String(!open));
+  roiAssume.hidden=open;
+});
+roiRender();
 
 /* ---------- FAQ ---------- */
 document.querySelectorAll('.faq-q').forEach(q=>{
