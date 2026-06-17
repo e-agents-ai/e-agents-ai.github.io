@@ -399,6 +399,13 @@ header.nav.scrolled{border-color:var(--line)}
 .roi-res-num.is-rec{color:var(--live);text-shadow:0 0 22px rgba(var(--live-rgb),.3)}
 .roi-res-sub{font-size:13px;color:var(--t2);line-height:1.45}
 .roi-res.is-rec .roi-res-sub{color:var(--live)}
+.roi-res-year{font-family:var(--mono);font-size:12.5px;color:var(--t3);font-variant-numeric:tabular-nums}
+.roi-res.is-rec .roi-res-year{color:rgba(var(--live-rgb),.85)}
+.roi-time{display:flex;align-items:center;gap:15px;background:rgba(65,214,255,.07);border:1px solid rgba(65,214,255,.28);border-radius:var(--r-md);padding:16px 18px;margin-top:4px}
+.roi-time-ic{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(65,214,255,.14);color:var(--cyn);display:grid;place-items:center}
+.roi-time-txt{display:flex;flex-direction:column;gap:3px}
+.roi-time-num{font-family:var(--mono);font-weight:600;font-size:clamp(18px,1.9vw,22px);color:var(--cyn);line-height:1.15;font-variant-numeric:tabular-nums}
+.roi-time-sub{font-size:12.5px;color:var(--t2);line-height:1.4}
 .roi-calc .roi-caveat{font-size:13px;color:var(--t3);line-height:1.55;margin:6px 0 0;max-width:none}
 .roi-calc .roi-foot{font-size:13px;color:var(--t3);line-height:1.55;margin:0;max-width:none;padding-left:14px;border-left:2px solid var(--line-strong)}
 .roi-cta{align-self:flex-start;margin-top:4px}
@@ -802,7 +809,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);background:var(--bg);colo
               <span class="roi-lbl" id="lblInquiries">Обращений в месяц</span>
               <div class="stepper" role="group" aria-labelledby="lblInquiries">
                 <button type="button" class="st-btn" data-k="inquiries" data-dir="-1" aria-label="Меньше обращений в месяц">−</button>
-                <span class="st-val" id="calcInquiries" aria-live="polite">120</span>
+                <span class="st-val" id="calcInquiries" aria-live="polite">250</span>
                 <button type="button" class="st-btn" data-k="inquiries" data-dir="1" aria-label="Больше обращений в месяц">+</button>
               </div>
             </div>
@@ -810,7 +817,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);background:var(--bg);colo
               <span class="roi-lbl" id="lblCheck">Средний чек, ₽</span>
               <div class="stepper" role="group" aria-labelledby="lblCheck">
                 <button type="button" class="st-btn" data-k="check" data-dir="-1" aria-label="Уменьшить средний чек">−</button>
-                <span class="st-val" id="calcCheck" aria-live="polite">3 000</span>
+                <span class="st-val" id="calcCheck" aria-live="polite">4 000</span>
                 <button type="button" class="st-btn" data-k="check" data-dir="1" aria-label="Увеличить средний чек">+</button>
               </div>
             </div>
@@ -842,18 +849,32 @@ footer{padding:46px 0;border-top:1px solid var(--line);background:var(--bg);colo
               <input type="range" class="roi-range" id="sMargin" data-k="margin" data-out="vMargin" min="20" max="90" step="1" value="50" aria-describedby="hMargin">
               <span class="roi-hint" id="hMargin">сколько остаётся с заказа после расходов</span>
             </div>
+            <div class="roi-slider">
+              <label for="sMinutes">Минут на одно обращение в переписке <span class="roi-sval" id="vMinutes">5 мин</span></label>
+              <input type="range" class="roi-range" id="sMinutes" data-k="minutes" data-out="vMinutes" data-unit=" мин" min="2" max="15" step="1" value="5" aria-describedby="hMinutes">
+              <span class="roi-hint" id="hMinutes">сколько в среднем уходит на ответы и уточнения по одному обращению</span>
+            </div>
           </div>
 
           <div class="roi-results" aria-live="polite">
             <div class="roi-res">
               <span class="roi-res-lbl">Сейчас теряете</span>
-              <span class="roi-res-num is-lost" id="rLostMoney">≈ 11 000 ₽/мес</span>
-              <span class="roi-res-sub" id="rLostOrders">≈ 7,2 заказов мимо при уже оплаченной рекламе</span>
+              <span class="roi-res-num is-lost" id="rLostMoney">≈ 30 000 ₽/мес</span>
+              <span class="roi-res-year" id="rLostYear">≈ 360 000 ₽ в год</span>
+              <span class="roi-res-sub" id="rLostOrders">≈ 15 заказов мимо при уже оплаченной рекламе</span>
             </div>
             <div class="roi-res is-rec">
               <span class="roi-res-lbl">Агент способен вернуть</span>
-              <span class="roi-res-num is-rec" id="rRecMoney">≈ 4 500 ₽/мес</span>
-              <span class="roi-res-sub" id="rRecOrders">≈ 2,9 заказов в месяц</span>
+              <span class="roi-res-num is-rec" id="rRecMoney">≈ 12 000 ₽/мес</span>
+              <span class="roi-res-year" id="rRecYear">≈ 144 000 ₽ в год</span>
+              <span class="roi-res-sub" id="rRecOrders">≈ 6,0 заказов в месяц</span>
+            </div>
+          </div>
+          <div class="roi-time" aria-live="polite">
+            <span class="roi-time-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div class="roi-time-txt">
+              <span class="roi-time-num" id="rHours">≈ 21 час в месяц</span>
+              <span class="roi-time-sub" id="rHoursSub">≈ 250 часов в год — первую линию переписки ведёт агент, а не ваши люди</span>
             </div>
           </div>
 
@@ -1278,20 +1299,25 @@ addEventListener('load',demoInViewCheck);
 demoInViewCheck();
 
 /* ---------- ROI calculator ---------- */
-const roi={inquiries:120,check:3000,lostShare:20,conv:30,recovery:40,margin:50};
+const roi={inquiries:250,check:4000,lostShare:20,conv:30,recovery:40,margin:50,minutes:5};
 const roiStep={inquiries:{step:10,min:10,max:600},check:{step:500,min:500,max:30000}};
 const roiEl={
   inquiries:document.getElementById('calcInquiries'),
   check:document.getElementById('calcCheck'),
   lostMoney:document.getElementById('rLostMoney'),
+  lostYear:document.getElementById('rLostYear'),
   lostOrders:document.getElementById('rLostOrders'),
   recMoney:document.getElementById('rRecMoney'),
-  recOrders:document.getElementById('rRecOrders')
+  recYear:document.getElementById('rRecYear'),
+  recOrders:document.getElementById('rRecOrders'),
+  hours:document.getElementById('rHours'),
+  hoursSub:document.getElementById('rHoursSub')
 };
 const fmtRu=n=>n.toLocaleString('ru-RU');
 const round500=n=>Math.round(n/500)*500;
 const fmtMoney=n=>fmtRu(round500(n))+' ₽';
 const fmtOrders=n=>n<10?n.toFixed(1).replace('.',','):fmtRu(Math.round(n));
+const plural=(n,one,few,many)=>{const a=Math.abs(n)%100,b=a%10;if(a>10&&a<20)return many;if(b>1&&b<5)return few;if(b===1)return one;return many;};
 function roiRender(){
   const valuePerOrder=roi.check*roi.margin/100;
   const lostInquiries=roi.inquiries*roi.lostShare/100;
@@ -1299,12 +1325,18 @@ function roiRender(){
   const lostMoney=lostOrders*valuePerOrder;
   const recoveredOrders=lostOrders*roi.recovery/100;
   const recoveredMoney=recoveredOrders*valuePerOrder;
+  const hoursMonth=roi.inquiries*roi.minutes/60;
+  const hM=Math.round(hoursMonth),hY=Math.round(hoursMonth*12);
   roiEl.inquiries.textContent=fmtRu(roi.inquiries);
   roiEl.check.textContent=fmtRu(roi.check);
   roiEl.lostMoney.textContent='≈ '+fmtMoney(lostMoney)+'/мес';
+  roiEl.lostYear.textContent='≈ '+fmtMoney(lostMoney*12)+' в год';
   roiEl.lostOrders.textContent='≈ '+fmtOrders(lostOrders)+' заказов мимо при уже оплаченной рекламе';
   roiEl.recMoney.textContent='≈ '+fmtMoney(recoveredMoney)+'/мес';
+  roiEl.recYear.textContent='≈ '+fmtMoney(recoveredMoney*12)+' в год';
   roiEl.recOrders.textContent='≈ '+fmtOrders(recoveredOrders)+' заказов в месяц';
+  roiEl.hours.textContent='≈ '+fmtRu(hM)+' '+plural(hM,'час','часа','часов')+' в месяц';
+  roiEl.hoursSub.textContent='≈ '+fmtRu(hY)+' '+plural(hY,'час','часа','часов')+' в год — первую линию переписки ведёт агент, а не ваши люди';
   document.querySelectorAll('#roiCalc .stepper .st-btn').forEach(b=>{
     const cfg=roiStep[b.dataset.k],dir=Number(b.dataset.dir);
     b.disabled=dir<0?roi[b.dataset.k]<=cfg.min:roi[b.dataset.k]>=cfg.max;
@@ -1326,7 +1358,7 @@ document.querySelectorAll('#roiCalc .roi-range').forEach(r=>{
   roiFill(r);
   r.addEventListener('input',()=>{
     roi[r.dataset.k]=Number(r.value);
-    document.getElementById(r.dataset.out).textContent=r.value+'%';
+    document.getElementById(r.dataset.out).textContent=r.value+(r.dataset.unit||'%');
     roiFill(r);
     roiRender();
     calcGoalOnce();
