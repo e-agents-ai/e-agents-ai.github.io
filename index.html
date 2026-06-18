@@ -371,7 +371,9 @@ header.nav.scrolled{border-color:var(--line)}
 .st-btn:focus-visible{outline:2px solid var(--cyn);outline-offset:2px}
 .st-val{flex:1;min-width:62px;text-align:center;font-family:var(--mono);font-weight:600;font-size:20px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* ROI calculator */
-.roi-calc{display:flex;flex-direction:column;gap:18px}
+.roi-calc{display:flex;flex-direction:column;gap:18px;min-width:0}
+.roi-calc .roi-inputs,.roi-calc .roi-results,.roi-field,.roi-res,.roi-time,.roi-time-txt{min-width:0}
+.roi-res-num,.roi-res-year,.roi-time-num{overflow-wrap:anywhere}
 .roi-inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .roi-field{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;display:flex;flex-direction:column;gap:11px}
 .roi-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);line-height:1.5}
@@ -537,33 +539,15 @@ header.nav.scrolled{border-color:var(--line)}
 /* =========================================================
    LAUNCH
 ========================================================= */
-.launch-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.launch-grid{display:grid;grid-template-columns:1fr;max-width:680px;margin:0 auto}
 .lsteps{display:flex;flex-direction:column}
 .lstep{display:grid;grid-template-columns:46px 1fr;gap:18px;padding:21px 0;position:relative;align-items:start}
 .lstep:not(:last-child)::after{content:"";position:absolute;left:22px;top:70px;bottom:-21px;width:2px;background:var(--line)}
 .lstep .ln{width:46px;height:46px;border-radius:14px;background:var(--grad);color:#fff;font-family:var(--mono);font-size:15px;font-weight:600;display:grid;place-items:center;position:relative;z-index:1;box-shadow:0 6px 18px rgba(77,125,255,.3)}
 .lstep h3{font-size:19.5px;margin:4px 0 7px;line-height:1.3}
 .lstep p{font-size:16px;color:var(--t2);line-height:1.6}
-.launch-shot{display:flex;flex-direction:column;align-items:center;gap:14px}
-.tg-shot{width:min(360px,100%);background:#17212b;border-radius:var(--r-md);border:1px solid var(--line-strong);box-shadow:0 26px 70px rgba(0,0,0,.5);overflow:hidden}
-.tg-shot-head{display:flex;align-items:center;gap:11px;padding:13px 15px;background:#242f3d}
-.tg-shot-ava{flex:none;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2AABEE,#229ED9);display:grid;place-items:center}
-.tg-shot-ava svg{width:19px;height:19px;fill:#fff}
-.tg-shot-who{color:#fff;font-weight:700;font-size:14px;line-height:1.25}
-.tg-shot-who small{display:block;font-weight:500;font-size:11px;color:#7d8b99;font-family:var(--mono)}
-.tg-shot-body{padding:18px 15px 20px;background:#0e1621}
-.tg-lead{position:relative;background:#fff;border-radius:13px;border-bottom-left-radius:4px;padding:13px 16px 14px;max-width:270px}
-.tg-lead .tl-top{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#0f9d63;margin-bottom:7px;font-weight:600}
-.tg-lead .tl-top::before{content:"✓";display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#dcf5e9;color:#0f9d63;font-size:10px}
-.tg-lead .trow{display:flex;justify-content:space-between;gap:14px;font-size:12.5px;padding:2px 0}
-.tg-lead .trow .k{color:var(--p3)}
-.tg-lead .trow .v{font-weight:700;color:var(--p1)}
-.tg-lead .tg-time{position:absolute;right:10px;bottom:6px;font-family:var(--mono);font-size:10px;color:var(--p3)}
-.shot-cap{width:min(360px,100%);text-align:center;font-family:var(--mono);font-size:13px;color:var(--t3);margin:0;line-height:1.5}
 .launch-cta{display:flex;justify-content:center;margin-top:44px}
 @media(max-width:860px){
-  .launch-grid{grid-template-columns:1fr;gap:48px}
-  .launch-shot{order:2}
   .launch-cta .btn{width:100%;justify-content:center}
 }
 
@@ -1048,26 +1032,6 @@ footer{padding:46px 0;border-top:1px solid var(--line);background:var(--bg);colo
         <div class="lstep"><span class="ln">2</span><div><h3>Получаете тест-агента в течение дня</h3><p>Пишете ему как клиент и смотрите, как он ведёт диалог до заявки.</p></div></div>
         <div class="lstep"><span class="ln">3</span><div><h3>Передаёте прайс, услуги и районы</h3><p>Я обучаю агента под ваш сервис.</p></div></div>
         <div class="lstep"><span class="ln">4</span><div><h3>Запуск за 3–5 дней</h3><p>Агент работает на ваших каналах, заявки падают в Telegram-группу.</p></div></div>
-      </div>
-      <!-- TODO: заменить на реальный скриншот из пилота -->
-      <div class="launch-shot reveal d2">
-        <div class="tg-shot" aria-hidden="true">
-          <div class="tg-shot-head">
-            <span class="tg-shot-ava"><svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.15-3.06-1.99 1.93c-.23.23-.42.42-.83.42z"></path></svg></span>
-            <span class="tg-shot-who">Заявки · ваш сервис<small>Telegram-группа</small></span>
-          </div>
-          <div class="tg-shot-body">
-            <div class="tg-lead">
-              <div class="tl-top">Заявка готова</div>
-              <div class="trow"><span class="k">Техника</span><span class="v">Стиралка</span></div>
-              <div class="trow"><span class="k">Поломка</span><span class="v">Не сливает</span></div>
-              <div class="trow"><span class="k">Район</span><span class="v">Дзержинский</span></div>
-              <div class="trow"><span class="k">Телефон</span><span class="v">+7 905 …</span></div>
-              <span class="tg-time">09:41</span>
-            </div>
-          </div>
-        </div>
-        <p class="shot-cap">Результат запуска: готовая заявка у вас в Telegram-группе</p>
       </div>
     </div>
     <div class="steps-foot reveal d2">
